@@ -2,8 +2,18 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>ラーメン二郎 営業状況ボード</title>
+
+<link rel="manifest" href="manifest.json">
+<meta name="theme-color" content="#172542">
+
+<link rel="icon" href="icons/icon-192.png" type="image/png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="二郎営業状況">
 <style>
   :root{
     --paper: #f2f3f0;
@@ -607,6 +617,12 @@ document.getElementById('search').addEventListener('input', renderAll);
 renderAll();
 setInterval(() => updateClock(nowInTokyo()), 1000);
 setInterval(renderAll, 60000);
+
+if('serviceWorker' in navigator){
+  window.addEventListener('load', () => {
+    navigator.serviceWorker.register('sw.js').catch(() => {});
+  });
+}
 </script>
 </body>
 </html>
